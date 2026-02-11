@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Landing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #FAF7F2;
+      color: #7A0C0C;
+      position: relative;
+    }
+
+    /* Header - top right, touch edge */
+    .header {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1rem 1rem 0 0;
+      text-align: right;
+      z-index: 10;
+    }
+
+    .title {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 12vw, 8rem);
+      color: #7A0C0C;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+      color: #7A0C0C;
+      margin-top: 0.35rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Centered image */
+    .image-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .image-wrap:hover {
+      transform: translate(-50%, -50%) scale(1.06) rotate(2deg);
+      filter: saturate(1.15);
+    }
+
+    .image-wrap img {
+      display: block;
+      max-width: min(55vw, 260px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Navigation - bottom right, stacked, touch edge */
+    .nav {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0 1rem 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.15rem;
+      z-index: 10;
+    }
+
+    .nav a {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(1.2rem, 4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #7A0C0C;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav a .char {
+      display: inline-block;
+      transition: font-family 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: #b84a2a;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Will Donnell</h1>
+    <p class="tagline">Graphic Designer / Jesus Follower</p>
+  </header>
+
+  <div class="image-wrap">
+    <img src="assets/will squish small.png" alt="Will">
+  </div>
+
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#linkedin">LinkedIn</a>
+  </nav>
+
+  <script>
+    (function () {
+      const FONTS = [
+        '"Helvetica Neue", Helvetica, Arial, sans-serif',
+        'Georgia, "Times New Roman", serif',
+        '"Palatino Linotype", "Book Antiqua", Palatino, serif'
+      ];
+
+      function wrapLetters(link) {
+        const text = link.textContent;
+        link.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = text[i];
+          span.style.setProperty('--jitter-x', Math.random());
+          span.style.setProperty('--jitter-y', Math.random());
+          link.appendChild(span);
+        }
+      }
+
+      function randomFont() {
+        return FONTS[Math.floor(Math.random() * FONTS.length)];
+      }
+
+      document.querySelectorAll('.nav a').forEach(function (link) {
+        wrapLetters(link);
+
+        link.addEventListener('mouseenter', function () {
+          this.querySelectorAll('.char').forEach(function (char) {
+            char.style.fontFamily = randomFont();
+          });
+        });
+
+        link.addEventListener('mouseleave', function () {
+          this.querySelectorAll('.char').forEach(function (char) {
+            char.style.fontFamily = '';
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
