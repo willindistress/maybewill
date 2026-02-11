@@ -1,11 +1,222 @@
----
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
+import Layout from "../layouts/Layout.astro";
+---
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <Layout title="will donnell!">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<Layout>
-	<Welcome />
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #FAF7F2;
+      color: #7A0C0C;
+      position: relative;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    body.image-hover {
+      background: #7A0C0C;
+      color: #FAF7F2;
+    }
+
+    body.image-hover .title,
+    body.image-hover .tagline,
+    body.image-hover .nav a {
+      color: #FAF7F2;
+    }
+
+    body.image-hover .nav a:hover {
+      color: #e0dbd5;
+    }
+
+    /* Header - top right, flush to edge */
+    .header {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 15px;
+      margin: 0;
+      text-align: right;
+      z-index: 10;
+    }
+
+    .title {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 9vw, 5.5rem);
+      color: #7A0C0C;
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      transition: color 0.5s ease;
+    }
+
+    .tagline {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+      color: #7A0C0C;
+      margin: 0;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.5s ease;
+    }
+
+    /* Centered image */
+    .image-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .image-wrap:hover {
+      transform: translate(-50%, -50%) scale(1.06) rotate(2deg);
+      filter: saturate(1.15);
+    }
+
+    .image-wrap img {
+      display: block;
+      max-width: min(55vw, 260px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Navigation - bottom left, flush to edge, no padding */
+    .nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 15px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      z-index: 10;
+    }
+
+    .nav a {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: #7A0C0C;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav a .char {
+      display: inline-block;
+      transition: font-family 0.2s ease, text-transform 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: #3d2828;
+    }
+  </style>
+
+
+  <header class="header">
+    <h1 class="title">Will Donnell</h1>
+    <p class="tagline">Graphic Designer / Jesus Follower</p>
+  </header>
+
+  <div class="image-wrap" id="image-wrap">
+    <img src="assets/will squish small.png" alt="if you're reading this, it means my site is broken. my face should be here. text me?">
+  </div>
+
+  <nav class="nav">
+    <a href="/about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </nav>
+
+  <script>
+    (function () {
+      const FONTS = [
+        '"Helvetica Neue", Helvetica, Arial, sans-serif',
+        'Georgia, "Times New Roman", serif',
+        '"Palatino Linotype", "Book Antiqua", Palatino, serif',
+        'Verdana, Geneva, sans-serif',
+        '"Trebuchet MS", "Lucida Grande", sans-serif',
+        '"Courier New", Courier, monospace',
+        'Impact, "Haettenschweiler", sans-serif',
+        '"Gill Sans", "Gill Sans MT", Calibri, sans-serif'
+      ];
+
+      function wrapLetters(link) {
+        const text = link.textContent;
+        link.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = text[i];
+          link.appendChild(span);
+        }
+      }
+
+      function randomFont() {
+        return FONTS[Math.floor(Math.random() * FONTS.length)];
+      }
+
+      function randomCase(ch) {
+        return Math.random() > 0.5 ? ch.toUpperCase() : ch.toLowerCase();
+      }
+
+      function applyHoverStyle(link) {
+        link.querySelectorAll('.char').forEach(function (char) {
+          char.style.fontFamily = randomFont();
+          char.textContent = randomCase(char.textContent);
+        });
+      }
+
+      function resetLinkStyle(link) {
+        var upper = link.getAttribute('data-original') || '';
+        link.querySelectorAll('.char').forEach(function (char, i) {
+          char.style.fontFamily = '';
+          if (upper[i]) char.textContent = upper[i];
+        });
+      }
+
+      document.querySelectorAll('.nav a').forEach(function (link) {
+        var original = link.textContent;
+        link.setAttribute('data-original', original);
+        wrapLetters(link);
+
+        link.addEventListener('mouseenter', function () {
+          applyHoverStyle(this);
+        });
+
+        link.addEventListener('mouseleave', function () {
+          resetLinkStyle(this);
+        });
+      });
+
+      var wrap = document.getElementById('image-wrap');
+      var body = document.body;
+      wrap.addEventListener('mouseenter', function () {
+        body.classList.add('image-hover');
+      });
+      wrap.addEventListener('mouseleave', function () {
+        body.classList.remove('image-hover');
+      });
+    })();
+  </script>
 </Layout>
+
