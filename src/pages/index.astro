@@ -1,137 +1,12 @@
 
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/index.css";
 ---
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <Layout title="will donnell!">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background: #FAF7F2;
-      color: #7A0C0C;
-      position: relative;
-      transition: background 0.5s ease, color 0.5s ease;
-    }
-
-    body.image-hover {
-      background: #7A0C0C;
-      color: #FAF7F2;
-    }
-
-    body.image-hover .title,
-    body.image-hover .tagline,
-    body.image-hover .nav a {
-      color: #FAF7F2;
-    }
-
-    body.image-hover .nav a:hover {
-      color: #e0dbd5;
-    }
-
-    /* Header - top right, flush to edge */
-    .header {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 15px;
-      margin: 0;
-      text-align: right;
-      z-index: 10;
-    }
-
-    .title {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(2rem, 9vw, 5.5rem);
-      color: #7A0C0C;
-      letter-spacing: -0.06em;
-      line-height: 0.9;
-      text-transform: uppercase;
-      transition: color 0.5s ease;
-    }
-
-    .tagline {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
-      color: #7A0C0C;
-      margin: 0;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.5s ease;
-    }
-
-    /* Centered image */
-    .image-wrap {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-      transition: transform 0.4s ease, filter 0.4s ease;
-    }
-
-    .image-wrap:hover {
-      transform: translate(-50%, -50%) scale(1.06) rotate(2deg);
-      filter: saturate(1.15);
-    }
-
-    .image-wrap img {
-      display: block;
-      max-width: min(55vw, 260px);
-      height: auto;
-      object-fit: contain;
-    }
-
-    /* Navigation - bottom left, flush to edge, no padding */
-    .nav {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 15px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      z-index: 10;
-    }
-
-    .nav a {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
-      font-weight: 600;
-      letter-spacing: -0.04em;
-      color: #7A0C0C;
-      text-decoration: none;
-      text-transform: uppercase;
-      position: relative;
-      transition: color 0.2s ease;
-    }
-
-    .nav a .char {
-      display: inline-block;
-      transition: font-family 0.2s ease, text-transform 0.2s ease;
-    }
-
-    .nav a:hover {
-      color: #3d2828;
-    }
-  </style>
-
-
   <header class="header">
     <h1 class="title">Will Donnell</h1>
     <p class="tagline">Graphic Designer / Jesus Follower</p>
@@ -141,9 +16,33 @@ import Layout from "../layouts/Layout.astro";
     <img src="assets/will squish small.png" alt="if you're reading this, it means my site is broken. my face should be here. text me?">
   </div>
 
+  <div class="about-overlay" id="about-overlay" aria-hidden="true">
+    <div class="about-overlay__content">
+      <div class="about-overlay__box" id="about-overlay-box">
+        <div class="body-copy">
+          <p style="text-align: center;">i'm will! great to meet you.</p>
+          <p class="indent-first" style="text-align: justify">i'm a 23 year old graphic designer based in Dallas. i'm passionate about where art and ministry meet, and how design can reach people for the Gospel and expand the kingdom of Heaven.</p>
+          <p class="indent-first" style="text-align: justify">with experience in programs such as adobe photoshop, illustrator, and after effects, as well as marketing and design roles in campus ministries, i want to blend artistic function and creative service with the life-changing news of Jesus.</p>
+          <p class="indent-first" style="text-align: justify">i love people, diet coke with lime, dancefloors, watching movies, wired headphones, serif typefaces, and this love by maroon 5.</p>
+          <p style="text-align: center">you can find me in these places:</p>
+          <div class="body-copy__links">
+            <a href="mailto:willdonell8@gmail.com">email</a>
+            <a href="https://instagram.com/wlldnnll" target="_blank" rel="noopener noreferrer">instagram</a>
+            <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">linkedin</a>
+          </div>
+        </div>
+      </div>
+      <div class="about-overlay__gifs" aria-hidden="true">
+        <img src="/framesbutton.gif" alt="">
+        <img src="/hedied4u.gif" alt="">
+        <img src="/macos8button.gif" alt="">
+      </div>
+    </div>
+  </div>
+
   <nav class="nav">
-    <a href="/about">About</a>
-    <a href="#portfolio">Portfolio</a>
+    <a href="#" id="about-link">About</a>
+    <a href="/portfolio">Portfolio</a>
     <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </nav>
 
@@ -208,13 +107,65 @@ import Layout from "../layouts/Layout.astro";
         });
       });
 
+      var aboutLink = document.getElementById('about-link');
+      var aboutOverlay = document.getElementById('about-overlay');
+      var aboutOverlayBox = document.getElementById('about-overlay-box');
+      if (aboutLink && aboutOverlay) {
+        aboutLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          aboutOverlay.classList.toggle('visible');
+          aboutOverlay.setAttribute('aria-hidden', aboutOverlay.classList.contains('visible') ? 'false' : 'true');
+        });
+        aboutOverlay.addEventListener('click', function (e) {
+          if (e.target === aboutOverlay) {
+            aboutOverlay.classList.remove('visible');
+            aboutOverlay.setAttribute('aria-hidden', 'true');
+          }
+        });
+        if (aboutOverlayBox) {
+          aboutOverlayBox.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+        }
+      }
+
       var wrap = document.getElementById('image-wrap');
       var body = document.body;
+      var hoverLocked = false;
+      var cursorOverImage = false;
+
       wrap.addEventListener('mouseenter', function () {
-        body.classList.add('image-hover');
+        cursorOverImage = true;
+        if (!hoverLocked) {
+          body.classList.add('image-hover');
+        } else {
+          body.classList.add('locked-hover');
+        }
       });
       wrap.addEventListener('mouseleave', function () {
-        body.classList.remove('image-hover');
+        cursorOverImage = false;
+        if (!hoverLocked) {
+          body.classList.remove('image-hover');
+        } else {
+          body.classList.remove('locked-hover');
+        }
+      });
+
+      wrap.addEventListener('click', function () {
+        hoverLocked = !hoverLocked;
+        if (hoverLocked) {
+          body.classList.add('image-hover');
+        } else {
+          body.classList.remove('image-hover');
+          body.classList.remove('locked-hover');
+        }
+        wrap.classList.add('bounce');
+        if (cursorOverImage) wrap.classList.add('bounce-to-hover');
+        wrap.addEventListener('animationend', function removeBounce() {
+          wrap.classList.remove('bounce');
+          wrap.classList.remove('bounce-to-hover');
+          wrap.removeEventListener('animationend', removeBounce);
+        });
       });
     })();
   </script>
