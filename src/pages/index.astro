@@ -1,4 +1,3 @@
-
 ---
 import Layout from "../layouts/Layout.astro";
 import "../styles/index.css";
@@ -42,7 +41,7 @@ import "../styles/index.css";
 
   <nav class="nav">
     <a href="#" id="about-link">About</a>
-    <a href="/portfolio">Portfolio</a>
+    <a href="/squashed">Portfolio</a>
     <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </nav>
 
@@ -59,7 +58,7 @@ import "../styles/index.css";
         '"Gill Sans", "Gill Sans MT", Calibri, sans-serif'
       ];
 
-      function wrapLetters(link) {
+      function wrapLetters(link: Element) {
         const text = link.textContent;
         link.textContent = '';
         for (let i = 0; i < text.length; i++) {
@@ -74,20 +73,20 @@ import "../styles/index.css";
         return FONTS[Math.floor(Math.random() * FONTS.length)];
       }
 
-      function randomCase(ch) {
+      function randomCase(ch: string) {
         return Math.random() > 0.5 ? ch.toUpperCase() : ch.toLowerCase();
       }
 
-      function applyHoverStyle(link) {
-        link.querySelectorAll('.char').forEach(function (char) {
+      function applyHoverStyle(link: { querySelectorAll: (arg0: string) => any[]; }) {
+        link.querySelectorAll('.char').forEach(function (char: { style: { fontFamily: string; }; textContent: any; }) {
           char.style.fontFamily = randomFont();
           char.textContent = randomCase(char.textContent);
         });
       }
 
-      function resetLinkStyle(link) {
+      function resetLinkStyle(link: { getAttribute: (arg0: string) => string; querySelectorAll: (arg0: string) => any[]; }) {
         var upper = link.getAttribute('data-original') || '';
-        link.querySelectorAll('.char').forEach(function (char, i) {
+        link.querySelectorAll('.char').forEach(function (char: { style: { fontFamily: string; }; textContent: any; }, i: string | number) {
           char.style.fontFamily = '';
           if (upper[i]) char.textContent = upper[i];
         });
@@ -98,11 +97,11 @@ import "../styles/index.css";
         link.setAttribute('data-original', original);
         wrapLetters(link);
 
-        link.addEventListener('mouseenter', function () {
+        link.addEventListener('mouseenter',  () => {
           applyHoverStyle(this);
         });
 
-        link.addEventListener('mouseleave', function () {
+        link.addEventListener('mouseleave',  () => {
           resetLinkStyle(this);
         });
       });
@@ -128,7 +127,7 @@ import "../styles/index.css";
           });
         }
       }
-
+      
       var wrap = document.getElementById('image-wrap');
       var body = document.body;
       var hoverLocked = false;
@@ -168,6 +167,92 @@ import "../styles/index.css";
         });
       });
     })();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const title = document.querySelector('.title');
+    const image = document.querySelector('.image-wrap');
+
+    if (!title || !image) return;
+
+    // Wrap each letter in a span
+    const text = title.textContent;
+    title.textContent = '';
+
+    [...text].forEach(letter => {
+      const span = document.createElement('span');
+      span.classList.add('char');
+      span.textContent = letter === ' ' ? '\u00A0' : letter;
+      title.appendChild(span);
+    });
+
+    const letters = Array.from(document.querySelectorAll('.title .char'));
+    let interval;
+    let settledCount = 0;
+    let decoded = false;
+    let isHovering = false;
+
+    function startDecode() {
+      settledCount = 0;
+      letters.forEach(l => l.classList.remove('serif'));
+
+      interval = setInterval(() => {
+        if (settledCount >= letters.length) {
+          clearInterval(interval);
+          return;
+        }
+
+        const unsettled = letters.filter(l => !l.classList.contains('serif'));
+        const randomLetter = unsettled[Math.floor(Math.random() * unsettled.length)];
+
+        if (randomLetter) {
+          randomLetter.classList.add('serif');
+          settledCount++;
+        }
+      }, 35); /* lower - snappier, higher - slower */
+    }
+
+    function resetLetters() {
+      clearInterval(interval);
+
+      let revertedCount = 0;
+
+      interval = setInterval(() => {
+        if (revertedCount >= letters.length) {
+          clearInterval(interval);
+          return;
+        }
+
+        const settled = letters.filter(l => l.classList.contains('serif'));
+        const randomLetter = settled[Math.floor(Math.random() * settled.length)];
+
+        if (randomLetter) {
+          randomLetter.classList.remove('serif');
+          revertedCount++;
+        }
+      }, 35);
+    }
+
+    image.addEventListener('mouseenter', () => {
+      isHovering = true;
+      startDecode();
+    });
+
+    image.addEventListener('mouseleave', () => {
+      isHovering = false;
+      resetLetters();
+    });
+
+    image.addEventListener('click', () => {
+      // If user is hovering (desktop), do nothing
+      if (isHovering) return;
+
+      if (decoded) {
+        resetLetters();
+      } else {
+        startDecode();
+      }
+      decoded = !decoded;
+    });
+  });
   </script>
 </Layout>
-

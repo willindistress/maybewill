@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/index.css";
+---
+
+<Layout title="Portfolio | will donnell!">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <div class="portfolio-center">
+    <p class="portfolio-coming">coming soon (i promise!)</p>
+    <a href="/" class="portfolio-back" aria-label="Back to home">
+      ← back
+    </a>
+  </div>
+
+  <style>
+    .portfolio-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .portfolio-coming {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.75rem, 2vw, 0.95rem);
+      font-weight: 500;
+      color: #7A0C0C;
+    }
+
+    .portfolio-back {
+      font-family: "Apple Garamond", Garamond, EB Garamond Pro, serif;
+      font-size: clamp(0.7rem, 2.5vw, 1rem);
+      font-weight: 300;
+      color: #7A0C0C;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .portfolio-back:hover {
+      opacity: 0.7;
+    }
+  </style>
+</Layout>

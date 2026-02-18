@@ -22,7 +22,10 @@ body.image-hover {
   color: #FAF7F2;
 }
 
-body.image-hover .title,
+body.image-hover .title {
+  color: #FAF7F2;
+}
+
 body.image-hover .tagline,
 body.image-hover .nav a {
   color: #FAF7F2;
@@ -103,6 +106,17 @@ body.theme-inverted.image-hover .nav a:hover {
   line-height: 0.9;
   text-transform: uppercase;
   transition: color 0.5s ease;
+}
+
+.title .char {
+  display: inline-block;
+  transition: font-family 0.2s ease;
+}
+
+.title .char.serif {
+  font-family: "Apple Garamond", "AppleGaramond", Garamond, serif;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .tagline {
