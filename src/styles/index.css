@@ -9,179 +9,183 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Apple Garamond Family */
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("/fonts/AppleGaramond-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* LCT Ciburial */
+
+@font-face {
+  font-family: "LCT Ciburial";
+  src: url("/fonts/LCT-Ciburial-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* Tir NotMono */
+
+@font-face {
+  font-family: "Tir NotMono";
+  src: url("/fonts/tir-notmono.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CRYSRG";
+  src: url("/fonts/CRYSRG.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calling Code";
+  src: url(/fonts/CallingCode.woff2) format("woff2");
+}
+
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #FAF7F2;
-  color: #7A0C0C;
+  background: #200a02;
+  color: #f1e2d1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   transition: background 0.5s ease, color 0.5s ease;
 }
 
-body.image-hover {
-  background: #7A0C0C;
-  color: #FAF7F2;
-}
-
-body.image-hover .title {
-  color: #FAF7F2;
-}
-
-body.image-hover .tagline,
-body.image-hover .nav a {
-  color: #FAF7F2;
-}
-
-body.image-hover .nav a:hover {
-  color: #e0dbd5;
-}
-
-/* Locked state: when cursor re-enters image, show alternate (white/red) until cursor leaves */
-body.image-hover.locked-hover {
-  background: #FAF7F2;
-  color: #7A0C0C;
-}
-
-body.image-hover.locked-hover .tagline,
-body.image-hover.locked-hover .nav a {
-  color: #000000;
-}
-
-body.image-hover.locked-hover .title {
-  color: #7A0C0C;
-}
-
-body.image-hover.locked-hover .nav a:hover {
-  color: #3d2828;
-}
-
-/* Inverted theme (after clicking the center image) */
-body.theme-inverted {
-  background: #7A0C0C;
-  color: #FAF7F2;
-}
-
-body.theme-inverted .title,
-body.theme-inverted .tagline,
-body.theme-inverted .nav a {
-  color: #FAF7F2;
-}
-
-body.theme-inverted .nav a:hover {
-  color: #e0dbd5;
-}
-
-/* When inverted, hover on image switches to white bg / red text */
-body.theme-inverted.image-hover {
-  background: #FAF7F2;
-  color: #7A0C0C;
-}
-
-body.theme-inverted.image-hover .title,
-body.theme-inverted.image-hover .tagline,
-body.theme-inverted.image-hover .nav a {
-  color: #7A0C0C;
-}
-
-body.theme-inverted.image-hover .nav a:hover {
-  color: #3d2828;
-}
-
-/* Header - top right, flush to edge */
 .header {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   padding: 15px;
   margin: 0;
-  text-align: right;
-  z-index: 10;
+  text-align: center;
 }
 
 .title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: clamp(2rem, 9vw, 5.5rem);
-  color: #7A0C0C;
+  display: inline-block;
+  font-family: fayte-pixel-hard, sans-serif;
+  font-weight: 500;
+  font-size: 35vw;
+  color: #f1e2d1;
   letter-spacing: -0.06em;
   line-height: 0.9;
-  text-transform: uppercase;
+  white-space: normal;
   transition: color 0.5s ease;
 }
 
-.title .char {
-  display: inline-block;
-  transition: font-family 0.2s ease;
+/* Optional: limit width on mobile */
+@media (max-width: 900px) {
+  .header {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .title {
+    max-width: 90%;  /* forces wrap */
+    line-height: 0.6;
+  }
+
+  .tagline {
+    margin-top: 0.5rem;
+  }
+
+  .nav {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .nav a {
+    text-align: center;
+  }
 }
 
-.title .char.serif {
-  font-family: "Apple Garamond", "AppleGaramond", Garamond, serif;
-  font-style: italic;
-  font-weight: 500;
-}
 
 .tagline {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "calling code", monospace;
+  font-style: normal;
   font-size: clamp(0.7rem, 2.5vw, 1.1rem);
-  color: #000000;
+  color: #b6a48d;
   margin: 0;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.00em;
   text-transform: uppercase;
   transition: color 0.5s ease;
 }
 
-/* Centered image */
-.image-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-.image-wrap:hover {
-  transform: translate(-50%, -50%) scale(1.06) rotate(2deg);
-  filter: saturate(1.15);
-}
-
-@keyframes image-bounce {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  40% { transform: translate(-50%, -50%) scale(0.92); }
-}
-
-@keyframes image-bounce-to-hover {
-  0%, 100% { transform: translate(-50%, -50%) scale(1.06) rotate(2deg); }
-  40% { transform: translate(-50%, -50%) scale(0.98) rotate(2deg); }
-}
-
-.image-wrap.bounce {
-  animation: image-bounce 0.22s ease-out;
-}
-
-.image-wrap.bounce.bounce-to-hover {
-  animation: image-bounce-to-hover 0.22s ease-out;
-}
-
-.image-wrap img {
-  display: block;
-  max-width: min(55vw, 260px);
-  height: auto;
-  object-fit: contain;
-}
-
 /* Navigation - bottom left, flush to edge, no padding */
 .nav {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 15px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  z-index: 10;
+position: static;           /* remove any absolute/bottom-left positioning */
+  display: flex;              /* horizontal layout */
+  flex-direction: row;        /* default: side by side */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically if needed */
+  gap: 2rem;                  /* space between links */
+  margin: 0 auto;             /* center container if necessary */
+  padding: 15px 0;            /* optional vertical padding */
 }
 
 .nav a {
@@ -190,23 +194,20 @@ body.theme-inverted.image-hover .nav a:hover {
   font-weight: 500;
   font-style: italic;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: #ede4da;
   text-decoration: none;
   text-transform: lowercase;
   position: relative;
   transition: color 0.2s ease;
 }
 
-.nav a .char {
-  display: inline-block;
-  transition: font-family 0.2s ease, text-transform 0.2s ease;
-}
-
 .nav a:hover {
-  color: #3d2828;
+  color: #b6a48d;
 }
 
+ 
 /* About overlay - covers image when About is clicked */
+/*
 .about-overlay {
   position: fixed;
   inset: 0;
@@ -226,7 +227,7 @@ body.theme-inverted.image-hover .nav a:hover {
 }
 
 .about-overlay__box {
-  background-color: #7A0C0C;
+  background-color: #4d1907;
   width: 300px;
   height: 380px;
   padding: 1rem;
@@ -293,17 +294,17 @@ body.theme-inverted.image-hover .nav a:hover {
 .about-overlay__box .body-copy__links a:hover {
   opacity: 0.8;
 }
-
+*/
 /* Inverted state (red background): about box is off-white, text is red */
+/*
 body.image-hover .about-overlay__box {
   background-color: #FAF7F2;
 }
 
 body.image-hover .about-overlay__box .body-copy {
-  color: #7A0C0C;
+  color: #4d1907;
 }
 
-/* Wrapper so hover on box reveals gifs below */
 .about-overlay__content {
   position: relative;
   display: flex;
@@ -333,3 +334,4 @@ body.image-hover .about-overlay__box .body-copy {
   object-fit: cover;
   flex: 1;
 }
+*/

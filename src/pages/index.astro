@@ -9,17 +9,24 @@ import "../styles/index.css";
   <header class="header">
     <h1 class="title">Will Donnell</h1>
     <p class="tagline">Graphic Designer / Jesus Follower</p>
+      <nav class="nav">
+        <a href="/squashed" id="about-link">About</a>
+        <a href="/squashed">Portfolio</a>
+        <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
   </header>
 
+<!--
   <div class="image-wrap" id="image-wrap">
     <img src="/willmain.png" alt="if you're reading this, it means my site is broken. my face should be here. text me?">
   </div>
-
+-->
+<!--
   <div class="about-overlay" id="about-overlay" aria-hidden="true">
     <div class="about-overlay__content">
       <div class="about-overlay__box" id="about-overlay-box">
         <div class="body-copy">
-          <p style="text-align: center;">i'm will! great to meet you.</p>
+          <p style="text-align: center; font-weight: bold">i'm will! great to meet you.</p>
           <p class="indent-first" style="text-align: justify">i'm a 23 year old graphic designer based in Dallas. i'm passionate about where art and ministry meet, and how design can reach people for the Gospel and expand the kingdom of Heaven.</p>
           <p class="indent-first" style="text-align: justify">with experience in programs such as adobe photoshop, illustrator, and after effects, as well as marketing and design roles in campus ministries, i want to blend artistic function and creative service with the life-changing news of Jesus.</p>
           <p class="indent-first" style="text-align: justify">i love people, diet coke with lime, dancefloors, watching movies, wired headphones, serif typefaces, and this love by maroon 5.</p>
@@ -38,12 +45,7 @@ import "../styles/index.css";
       </div>
     </div>
   </div>
-
-  <nav class="nav">
-    <a href="#" id="about-link">About</a>
-    <a href="/squashed">Portfolio</a>
-    <a href="https://www.linkedin.com/in/willdonnell8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  </nav>
+-->
 
   <script>
     (function () {
@@ -174,85 +176,6 @@ import "../styles/index.css";
 
     if (!title || !image) return;
 
-    // Wrap each letter in a span
-    const text = title.textContent;
-    title.textContent = '';
-
-    [...text].forEach(letter => {
-      const span = document.createElement('span');
-      span.classList.add('char');
-      span.textContent = letter === ' ' ? '\u00A0' : letter;
-      title.appendChild(span);
-    });
-
-    const letters = Array.from(document.querySelectorAll('.title .char'));
-    let interval;
-    let settledCount = 0;
-    let decoded = false;
-    let isHovering = false;
-
-    function startDecode() {
-      settledCount = 0;
-      letters.forEach(l => l.classList.remove('serif'));
-
-      interval = setInterval(() => {
-        if (settledCount >= letters.length) {
-          clearInterval(interval);
-          return;
-        }
-
-        const unsettled = letters.filter(l => !l.classList.contains('serif'));
-        const randomLetter = unsettled[Math.floor(Math.random() * unsettled.length)];
-
-        if (randomLetter) {
-          randomLetter.classList.add('serif');
-          settledCount++;
-        }
-      }, 35); /* lower - snappier, higher - slower */
-    }
-
-    function resetLetters() {
-      clearInterval(interval);
-
-      let revertedCount = 0;
-
-      interval = setInterval(() => {
-        if (revertedCount >= letters.length) {
-          clearInterval(interval);
-          return;
-        }
-
-        const settled = letters.filter(l => l.classList.contains('serif'));
-        const randomLetter = settled[Math.floor(Math.random() * settled.length)];
-
-        if (randomLetter) {
-          randomLetter.classList.remove('serif');
-          revertedCount++;
-        }
-      }, 35);
-    }
-
-    image.addEventListener('mouseenter', () => {
-      isHovering = true;
-      startDecode();
-    });
-
-    image.addEventListener('mouseleave', () => {
-      isHovering = false;
-      resetLetters();
-    });
-
-    image.addEventListener('click', () => {
-      // If user is hovering (desktop), do nothing
-      if (isHovering) return;
-
-      if (decoded) {
-        resetLetters();
-      } else {
-        startDecode();
-      }
-      decoded = !decoded;
-    });
   });
   </script>
 </Layout>
