@@ -1,0 +1,149 @@
+:root {
+  --bar-width: 4px;
+  --bar-gap: 28px; /* distance between bar and timeline */
+  --timeline-width: 150px;
+  --gap: 1rem;
+  --font-family: "Apple Garamond", "AppleGaramond", Garamond, serif;
+}
+
+/* Smooth scrolling for the main container */
+html { scroll-behavior: smooth; }
+
+
+body {
+    background: #FAF7F2;
+}
+
+.portfolio {
+  display: block;
+  padding: 1rem 2rem;
+  font-family: var(--font-family);
+}
+
+/* Vertical bar */
+.bar {
+  position: fixed;
+  left: var(--bar-gap);
+  top: 1rem;
+  width: 3px;
+  height: calc(100vh - 2rem);
+  background: rgb(0, 0, 0);
+  z-index: 40;
+  overflow: visible;
+}
+
+.bar .indicator {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: rgb(255, 255, 255);
+  transform: translateY(0);
+  transition: transform 180ms ease, height 120ms ease, background 120ms ease;
+  pointer-events: none;
+}
+
+/* Timeline container */
+.timeline {
+  font-family: var(--font-family);
+  font-weight: 200;
+  font-style: italic;
+  position: fixed;
+  left: 3rem;
+  top: 1rem;
+  width: var(--timeline-width);
+  height: calc(100vh - 2rem);
+  padding-right: 1rem;
+  z-index: 41;
+  overflow-y: auto;
+}
+
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Main timeline items */
+.timeline > ul > li {
+  margin-bottom: 2rem; /* vertical space between main items */
+}
+
+/* Main links */
+.timeline a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  text-decoration: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  position: relative;
+  color:black
+}
+
+.timeline a:hover { 
+  opacity: 0.95; 
+  transform: translateX(2px); 
+}
+
+.timeline a.active {
+    color: #ba0a0a;
+  opacity: 1;
+  font-style: normal;
+
+}
+
+.timeline .date {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* Subpoints: indented from parent */
+.timeline > ul > li > ul.subpoints {
+  display: block;             /* ensures block layout */
+  list-style: disc;
+  list-style-position: outside;
+  margin-left: 0rem;          /* noticeable indent from parent */
+  margin-top: 0rem;        /* small gap below main link */
+  padding-left: 0;
+}
+
+.timeline > ul > li > ul.subpoints li a {
+  display: block; 
+  font-size: 0.85rem;
+  opacity: 0.6;
+  padding-left: .3em;
+  padding-top: 0.25rem;
+}
+
+.timeline ul.subpoints li a:hover {
+  opacity: 0.9;
+  transform: translateX(2px);
+}
+
+/* Main content area */
+.content {
+  margin-left: calc(var(--bar-width) + var(--timeline-width) + var(--bar-gap) + 16px);
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding-left: var(--gap);
+  padding-right: 2rem;
+}
+
+.post {
+  padding: 3rem 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  min-height: 60vh;
+}
+
+.post h2 { 
+  margin: 0 0 0.5rem 0; 
+  font-weight: 400; 
+}
+
+.post p { 
+  margin: 0; 
+  opacity: 0.9; 
+}

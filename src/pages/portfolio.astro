@@ -1,49 +1,125 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import "../styles/index.css";
+import Layout from '../layouts/Layout.astro'
+import '../styles/portfolio.css';
+export let title = 'Portfolio'
 ---
 
-<Layout title="Portfolio | will donnell!">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<Layout title={title}>
+  <div class="portfolio">
+    <div class="bar" aria-hidden="true"><div class="indicator"></div></div>
 
-  <div class="portfolio-center">
-    <p class="portfolio-coming">coming soon (i promise!)</p>
-    <a href="/" class="portfolio-back" aria-label="Back to home">
-      ← back
-    </a>
+    <aside class="timeline" aria-label="Timeline">
+      <ul>
+        <li>
+            <a href="#position1" data-id="position1" class="active">
+            <strong>watermark community church</strong>
+            <span class="date">2024</span></a>
+         <ul class="subpoints">
+            <li><a href="#sub1">project 1</a></li>
+            <li><a href="#sub2">yada yasdsa</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#position2" data-id="position2">
+            <strong>pathway</strong>
+            <span class="date">2023</span>
+        </a>
+         <ul class="subpoints">
+            <li><a href="#sub3">logo</a></li>
+            <li><a href="#sub4">branding</a></li>
+            <li><a href="#sub5">promotional campaigns</a></li>
+            <li><a href="#sub6">extras</a></li>
+        </ul>
+        </li>
+        
+      </ul>
+    </aside>
+
+    <main class="content" role="main">
+      <section id="position1" class="post">
+        <h2>watermark community church</h2>
+        <p>Roles:
+          Communications Resident (2025-present)
+          Creative Intern (June 2024 - August 2024)
+        </p>
+      </section>
+
+      <section id="position2" class="post">
+        <h2>pathway</h2>
+        <p>Short description of pathway.</p>
+      </section>
+
+      </section>
+    </main>
   </div>
 
-  <style>
-    .portfolio-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
+
+  <script type="module">
+    const main = document.querySelector('.content');
+    const sections = Array.from(main.querySelectorAll('section[id]'));
+    const links = Array.from(document.querySelectorAll('.timeline a'));
+    const bar = document.querySelector('.bar');
+    const indicator = bar.querySelector('.indicator');
+
+    function setActive(id) {
+      links.forEach(l => {
+        if (l.dataset.id === id) {
+          l.classList.add('active');
+          l.setAttribute('aria-current','true');
+        } else {
+          l.classList.remove('active');
+          l.removeAttribute('aria-current');
+        }
+      });
+      const active = document.querySelector('.timeline a.active');
+      if (active) moveIndicatorToLink(active, true);
     }
 
-    .portfolio-coming {
-      margin: 0;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: clamp(0.75rem, 2vw, 0.95rem);
-      font-weight: 500;
-      color: #7A0C0C;
+    function moveIndicatorToLink(link, animate = true, height = 12) {
+      const rect = link.getBoundingClientRect();
+      const barRect = bar.getBoundingClientRect();
+      const center = rect.top + rect.height / 2 - barRect.top;
+      if (!animate) indicator.style.transition = 'none';
+      indicator.style.height = height + 'px';
+      indicator.style.transform = `translateY(${center - height / 2}px)`;
+      if (!animate) requestAnimationFrame(() => indicator.style.transition = '');
     }
 
-    .portfolio-back {
-      font-family: "Apple Garamond", Garamond, EB Garamond Pro, serif;
-      font-size: clamp(0.7rem, 2.5vw, 1rem);
-      font-weight: 300;
-      color: #7A0C0C;
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-    .portfolio-back:hover {
-      opacity: 0.7;
-    }
-  </style>
+    // Observe sections inside the scrolling main area
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, { root: main, threshold: 0.5 });
+
+    sections.forEach(s => obs.observe(s));
+
+    // Smoothly scroll a section into view inside the main container
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.dataset.id;
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      link.addEventListener('mouseenter', () => {
+        moveIndicatorToLink(link, true, 18);
+        indicator.style.background = 'rgba(0,0,0,1)';
+      });
+      link.addEventListener('mouseleave', () => {
+        const active = document.querySelector('.timeline a.active');
+        if (active) moveIndicatorToLink(active, true, 12);
+        indicator.style.background = 'rgba(0,0,0,0.12)';
+      });
+    });
+
+    // Initialize indicator position to the active one on load
+    requestAnimationFrame(() => {
+      const active = document.querySelector('.timeline a.active');
+      if (active) moveIndicatorToLink(active, false, 12);
+    });
+  </script>
 </Layout>
