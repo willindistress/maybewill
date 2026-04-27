@@ -93,6 +93,14 @@ html, body {
   src: url(/fonts/CallingCode.woff2) format("woff2");
 }
 
+@font-face {
+  font-family: fayte-pixel-hard;
+  src: url(/fonts/Fayte-Pixel-Hard.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   background: #200a02;
   color: #f1e2d1;
