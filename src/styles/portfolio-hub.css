@@ -1,0 +1,440 @@
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hub page ─────────────────────────────────────────────── */
+
+.pf-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.pf-label {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: #b6a48d;
+  text-align: center;
+  animation: fadeSlideDown 1s ease 0s both;
+}
+
+.pf-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  animation: fadeSlideDown 1s ease 0.15s both;
+}
+
+.pf-link {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  color: #f1e2d1;
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.pf-link:hover {
+  color: #b6a48d;
+}
+
+.pf-back {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: #b6a48d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  animation: fadeSlideDown 1s ease 0.3s both;
+}
+
+.pf-back:hover {
+  color: #f1e2d1;
+}
+
+/* ── Watermark page ───────────────────────────────────────── */
+
+.wm-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1.5rem 2rem 3rem;
+  gap: 3rem;
+}
+
+.wm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  animation: fadeSlideDown 1s ease 0s both;
+}
+
+.wm-title {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: #b6a48d;
+}
+
+.wm-back {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: #b6a48d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wm-back:hover {
+  color: #f1e2d1;
+}
+
+.wm-project {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: fadeSlideDown 1s ease 0.1s both;
+}
+
+.wm-project__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wm-project__header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wm-project__title {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: normal;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: #f1e2d1;
+}
+
+.wm-project__date {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  color: #b6a48d;
+}
+
+.wm-info-btn {
+  background: none;
+  border: 1px solid #b6a48d;
+  border-radius: 20px;
+  color: #b6a48d;
+  cursor: pointer;
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  padding: 0.15rem 0.6rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.wm-info-btn:hover {
+  color: #f1e2d1;
+  border-color: #f1e2d1;
+}
+
+/* ── Lightbox ─────────────────────────────────────────────── */
+
+.wm-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.wm-lightbox.open {
+  display: flex;
+}
+
+.wm-lightbox__img {
+  max-width: 82vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  animation: fadeSlideDown 0.3s ease both;
+}
+
+.wm-lightbox__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wm-lightbox__arrow {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: normal;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #b6a48d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.5rem;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.wm-lightbox__arrow:hover {
+  color: #f1e2d1;
+}
+
+.wm-lightbox__arrow:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.wm-lightbox__back {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: #b6a48d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  animation: fadeSlideDown 0.3s ease 0.05s both;
+}
+
+.wm-lightbox__back:hover {
+  color: #f1e2d1;
+}
+
+/* ── Modal ────────────────────────────────────────────────── */
+
+.wm-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+.wm-modal.open {
+  display: flex;
+}
+
+.wm-modal__box {
+  background: #2e0f05;
+  border: 1px solid rgba(182, 164, 141, 0.4);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  animation: fadeSlideDown 0.3s ease both;
+}
+
+.wm-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #b6a48d;
+  cursor: pointer;
+  font-family: "Apple Garamond", Garamond, serif;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.wm-modal__close:hover {
+  color: #f1e2d1;
+}
+
+.wm-modal__title {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2vw, 1.1rem);
+  color: #f1e2d1;
+  margin-bottom: 0.75rem;
+  padding-right: 1.5rem;
+}
+
+.wm-modal__blurb {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: normal;
+  font-size: clamp(1rem, 1.5vw, 0.95rem);
+  color: #b6a48d;
+  line-height: 1.3;
+}
+
+.wm-modal__blurb + .wm-modal__blurb {
+  margin-top: 0.6rem;
+}
+
+/* Strip wrapper: clips overflow, provides anchor for arrows */
+.wm-strip-wrapper {
+  position: relative;
+}
+
+/* Scrollable image row */
+.wm-strip {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* padding-right leaves room so the last image doesn't hide under the arrows */
+  padding-right: 5rem;
+  padding-bottom: 0.25rem;
+}
+
+.wm-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual image in the strip */
+.wm-strip__img {
+  flex-shrink: 0;
+  height: clamp(220px, 52vh, 400px);
+  width: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #2e0f05;
+}
+
+/* Inline strip divider label (e.g. "concepts:") */
+.wm-strip__divider {
+  flex-shrink: 0;
+  align-self: center;
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  color: #b6a48d;
+  white-space: nowrap;
+  padding: 0 0.5rem;
+}
+
+/* Arrow overlay pinned to the right edge */
+.wm-strip-arrows {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem 0 2.5rem;
+  /* fade from transparent → background so arrows feel anchored */
+  background: linear-gradient(to right, transparent 0%, rgba(32, 10, 2, 0.5) 60%, rgba(32, 10, 2, 0.75) 100%);
+  pointer-events: none;
+}
+
+.wm-arr {
+  pointer-events: all;
+  background: none;
+  border: none;
+  color: #b6a48d;
+  cursor: pointer;
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  padding: 0.25rem 0.1rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.wm-arr:hover {
+  color: #f1e2d1;
+}
+
+.wm-arr:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+
+@media (max-width: 600px) {
+  /* ── Watermark page — mobile ──────────────────────────────── */
+
+  .wm-page {
+    padding: 1rem 1rem 2rem;
+    gap: 1.25rem;
+  }
+
+  .wm-project {
+    gap: 0.4rem;
+  }
+
+  .wm-strip {
+    gap: 0.4rem;
+  }
+
+  .wm-project__header {
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+  }
+
+  .wm-project__header-left {
+    gap: 0.5rem;
+  }
+
+  .wm-project__date {
+    width: 100%;
+    order: 1;
+  }
+
+  .wm-strip__img {
+    height: clamp(130px, 36vw, 180px);
+  }
+
+  .wm-strip {
+    padding-right: 3.5rem;
+  }
+
+  .wm-lightbox__row {
+    position: relative;
+  }
+
+  .wm-lightbox__img {
+    max-width: 92vw;
+  }
+
+  .wm-lightbox__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .wm-lightbox__arrow--prev { left: 0.25rem; }
+  .wm-lightbox__arrow--next { right: 0.25rem; }
+}

@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/index.css";
+import "../styles/pathway.css";
+import "../styles/portfolio-hub.css";
+---
+
+<style is:global>
+  body { background: #000; }
+</style>
+
+<Layout title="Pathway at Baylor University — Will Donnell">
+  <div class="pw-page">
+    <header class="pw-header">
+      <span class="pw-title">Pathway at Baylor University, 2023–24</span>
+      <a href="/portfolio" class="pw-back">← back</a>
+    </header>
+
+    <div class="pw-grid">
+      <img class="pw-grid__img" src="/Graphics/Pathway/Pathway1.webp" alt="Pathway photo 1" />
+      <img class="pw-grid__img" src="/Graphics/Pathway/Pathway2.webp" alt="Pathway photo 2" />
+      <img class="pw-grid__img" src="/Graphics/Pathway/Pathway3.webp" alt="Pathway photo 3" />
+      <img class="pw-grid__img" src="/Graphics/Pathway/Pathway4.webp" alt="Pathway photo 4" />
+      <img class="pw-grid__img" src="/Graphics/Pathway/Pathway5.webp" alt="Pathway photo 5" />
+    </div>
+  </div>
+
+  <div class="wm-lightbox" id="pw-lightbox">
+    <div class="wm-lightbox__row">
+      <button class="wm-lightbox__arrow wm-lightbox__arrow--prev" id="pw-lightbox-prev">←</button>
+      <img class="wm-lightbox__img" src="" alt="" id="pw-lightbox-img" />
+      <button class="wm-lightbox__arrow wm-lightbox__arrow--next" id="pw-lightbox-next">→</button>
+    </div>
+    <button class="wm-lightbox__back" id="pw-lightbox-back">← back</button>
+  </div>
+</Layout>
+
+<script>
+  const lightbox = document.getElementById('pw-lightbox') as HTMLElement;
+  const lightboxImg = document.getElementById('pw-lightbox-img') as HTMLImageElement;
+  const prevBtn = document.getElementById('pw-lightbox-prev') as HTMLButtonElement;
+  const nextBtn = document.getElementById('pw-lightbox-next') as HTMLButtonElement;
+
+  const images = Array.from(document.querySelectorAll<HTMLImageElement>('.pw-grid__img'));
+  let currentIndex = 0;
+
+  function showImage(index: number) {
+    currentIndex = index;
+    lightboxImg.src = images[index].src;
+    lightboxImg.alt = images[index].alt;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === images.length - 1;
+  }
+
+  images.forEach((img, i) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      showImage(i);
+      lightbox.classList.add('open');
+    });
+  });
+
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex - 1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex + 1); });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  document.getElementById('pw-lightbox-back')!.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+</script>

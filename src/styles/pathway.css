@@ -1,0 +1,71 @@
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page ─────────────────────────────────────────────────── */
+
+.pw-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1.5rem 2rem 2rem;
+  background: #000;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+
+.pw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+  animation: fadeSlideDown 1s ease 0s both;
+}
+
+.pw-title {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: #b6a48d;
+}
+
+.pw-back {
+  font-family: "Apple Garamond", Garamond, serif;
+  font-style: italic;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  color: #b6a48d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pw-back:hover {
+  color: #f1e2d1;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+
+.pw-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  animation: fadeSlideDown 1s ease 0.1s both;
+}
+
+.pw-grid__img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  cursor: pointer;
+}
+
+.pw-grid__img:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* ── Lightbox (shared styles imported from portfolio-hub.css) ─ */
+/* .wm-lightbox classes are used directly — no overrides needed  */
